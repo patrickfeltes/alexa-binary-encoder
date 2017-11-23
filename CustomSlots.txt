@@ -1,0 +1,2 @@
+Type: Word
+Values: word

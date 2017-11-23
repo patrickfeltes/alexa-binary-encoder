@@ -1,0 +1,7 @@
+EncodeIntent Convert {word} to binary
+EncodeIntent Convert {word}
+EncodeIntent {word}
+EncodeIntent I would like you to convert {word} to binary
+EncodeIntent I would like you to convert {word}
+EncodeIntent I would like to convert {word}
+EncodeIntent Please covert {word} to binary
