@@ -10,14 +10,20 @@ var handlers = {
 
   'EncodeIntent': function () {
     var word = this.event.request.intent.slots.word.value;
-    var binary = "";
-    for (var i = 0; i < word.length; i++) {
-        var characterBinary = word[i].charCodeAt(0).toString(2);
-        characterBinary = ((8 - characterBinary.length) * "0") + characterBinary;
-        binary += characterBinary + "...";
+    
+    if (word == undefined) {
+        this.response.speak("Invalid input. Please try again.").listen();
+        this.emit(':responseReady');
+    } else {
+        var binary = "";
+        for (var i = 0; i < word.length; i++) {
+            var characterBinary = word[i].charCodeAt(0).toString(2);
+            characterBinary = ((8 - characterBinary.length) * "0") + characterBinary;
+            binary += characterBinary + "...";
+        }
+        this.response.speak(word + " converted to binary is ..." + binary);
+        this.emit(':responseReady');
     }
-    this.response.speak(word + " converted to binary is ..." + binary);
-    this.emit(':responseReady');
   },
   
   'AMAZON.HelpIntent': function() {
@@ -26,9 +32,14 @@ var handlers = {
   },
   
   'AMAZON.StopIntent': function() {
-    this.response.speak("Goodbye");
-    this.emit('reponseReady');
-  }
+    this.response.speak("Goodbye.");
+    this.emit(':responseReady');  
+  },
+  
+  'AMAZON.CancelIntent': function() {
+    this.response.speak("Goodbye.");
+    this.emit(':responseReady');  
+  },
 }
 
 exports.handler = function(event, context, callback) {
